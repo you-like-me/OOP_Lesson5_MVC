@@ -10,6 +10,11 @@ public class FileOperationImpl implements FileOperation {
 
     public FileOperationImpl(String fileName) {
         this.fileName = fileName;
+        try (FileWriter writer = new FileWriter(fileName, false)) {
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public List<String> readAllLines() {
