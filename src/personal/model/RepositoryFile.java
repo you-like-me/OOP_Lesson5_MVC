@@ -37,7 +37,7 @@ public class RepositoryFile implements Repository {
         users.add(user);
         List<String> lines = new ArrayList<>();
         for (User item: users) {
-            lines.add(mapper.map(user));
+            lines.add(mapper.map(item));
         }
         fileOperation.saveAllLines(lines);
         return id;
