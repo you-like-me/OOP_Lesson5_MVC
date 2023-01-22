@@ -4,7 +4,6 @@ import personal.model.Repository;
 import personal.model.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserController {
     private final Repository repository;
@@ -41,6 +40,12 @@ public class UserController {
         repository.updateUser(newGuy);
     }
 
+    public void deleteUser(String idnumber){
+
+        repository.DeleteUser(idnumber);
+
+    }
+
     private void validateUser(User user) throws Exception {
         if (user.getFirstName().contains(" "))
             throw new Exception("User name has unacceptable characters");
@@ -48,17 +53,17 @@ public class UserController {
             throw new Exception("User lastname has unacceptable characters");
     }
 
-    private void validateUserId (User user) throws Exception{
+    private void validateUserId(User user) throws Exception {
         if (user.getId().isEmpty())
             throw new Exception("User has no id");
         validateUser(user);
     }
 
-    public void idPresenceValidation (String inputId) throws Exception {
+    public void idPresenceValidation(String inputId) throws Exception {
         List<User> users = repository.getAllUsers();
         for (User u : users) {
             if (u.getId().equals(inputId))
-               return;
+                return;
         }
         throw new Exception("No such ID here");
     }

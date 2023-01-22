@@ -43,6 +43,11 @@ public class ViewUser {
                         userController.idPresenceValidation(numId);
                         userController.updateUser(numId, createAGuy());
                         break;
+                    case DELETE:
+                        String delId = prompt("Какой контакт удалить? Введите номер ID: ");
+                        userController.idPresenceValidation(delId);
+                        userController.deleteUser(delId);
+                        break;
                 }
             } catch (Exception e) {
                 System.out.println("Oopsie!\n"+ e.getMessage()); ;
@@ -63,4 +68,5 @@ public class ViewUser {
         User newGuy = new User(firstName, lastName, phone);
         return newGuy;
     }
-}
+
+   }

@@ -28,7 +28,7 @@ public class RepositoryFile implements Repository {
         int max = 0;
         for (User item : users) {
             int id = Integer.parseInt(item.getId());
-            if (max < id){
+            if (max < id) {
                 max = id;
             }
         }
@@ -50,9 +50,16 @@ public class RepositoryFile implements Repository {
         writeDown(users);
     }
 
-    private void writeDown (List<User> users){
+    public void DeleteUser(String idnumber) {
+        List<User> users = getAllUsers();
+        User target = users.stream().filter(i -> i.getId().equals(idnumber)).findFirst().get();
+        users.remove(target);
+        writeDown(users);
+    }
+
+    private void writeDown(List<User> users) {
         List<String> lines = new ArrayList<>();
-        for (User item: users) {
+        for (User item : users) {
             lines.add(mapper.map(item));
         }
         fileOperation.saveAllLines(lines);
